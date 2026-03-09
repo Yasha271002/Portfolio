@@ -1,0 +1,68 @@
+﻿<Window x:Class="SberUniversity.Views.Window.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SberUniversity"
+        xmlns:helpers="clr-namespace:SberUniversity.Helpers"
+        xmlns:controls="clr-namespace:SberUniversity.Views.Controls"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:window="clr-namespace:SberUniversity.ViewModel.Window"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        WindowStyle="None"
+        Title="SberUniversity">
+    <Window.DataContext>
+        <window:MainWindowViewModel />
+    </Window.DataContext>
+    <Viewbox>
+        <Grid Width="1080" Height="1920">
+            <Frame
+               x:Name="MainFrame"
+               NavigationUIVisibility="Hidden"
+               VerticalAlignment="Bottom"
+               Source="../Page/StartPage.xaml"/>
+            <controls:BackdropControl
+                EnableAnimation="True"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                BackdropBrush="Black"
+                IsOpen="{Binding IsPopupOpen
+                ,Source={x:Static helpers:NavigationManager.Instance}}"
+                BackdropOpacity="0.5"
+                Panel.ZIndex="1000"
+                d:IsHidden="True">
+                <Frame NavigationUIVisibility="Hidden"
+                   Focusable="False"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   Initialized="PopupFrame_OnInitialized" />
+            </controls:BackdropControl>
+            <Button
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Panel.ZIndex="3000"
+                Width="100"
+                Height="100">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="PreviewMouseDown">
+                        <b:InvokeCommandAction Command="{Binding StartTimerCommand}" />
+                    </b:EventTrigger>
+                    <b:EventTrigger EventName="PreviewMouseUp">
+                        <b:InvokeCommandAction Command="{Binding StopTimerCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+                <Button.Style>
+                    <Style TargetType="Button">
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border Width="240" Height="240" Background="Transparent">
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Viewbox>
+</Window>

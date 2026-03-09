@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters1="clr-namespace:SberUniversity.Helpers.Converters">
+    <converters1:ImageConverter x:Key="ImageConverter" />
+    <converters1:ValueInRangeConverter x:Key="ValueInRangeConverter" />
+</ResourceDictionary>

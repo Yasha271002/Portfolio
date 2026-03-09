@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="SberUniversity.Views.Popups.UserAgreement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:popups="clr-namespace:SberUniversity.ViewModel.Popups"
+             xmlns:helpers="clr-namespace:SberUniversity.Helpers"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <popups:UserAgreementViewModel/>
+    </UserControl.DataContext>
+    <Border CornerRadius="36" Padding="60 70"
+            Height="1800" Width="960" Background="White">
+        <Grid >
+            <TextBlock Style="{StaticResource TitleTextBoxStyle}"
+                    FontWeight="SemiBold"
+                   FontSize="28" Text="Политика в отношении обработки персональных данных АНО ДПО «Корпоративный университет Сбербанка»"
+                   TextAlignment="Left" TextWrapping="Wrap" Foreground="Black"/>
+            <ScrollViewer Margin=" 0 100 0 259"
+                          PanningMode="VerticalOnly"
+                          helpers:ManipulationBoundaryFeedbackHelper.Handled="True"
+                          VerticalScrollBarVisibility="Visible">
+                <ScrollViewer.Style>
+                    <Style BasedOn="{StaticResource PrimaryScrollViewer}" TargetType="ScrollViewer">
+                        <Setter Property="Opacity" Value="0"/>
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <Trigger Property="Opacity" Value="1">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </Trigger>
+                            <EventTrigger RoutedEvent="Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard TargetProperty="Opacity">
+                                        <DoubleAnimation To="1"
+                                                         Duration="0:0:0.2"
+                                                         BeginTime="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
+                <TextBlock Text="{Binding SberUniversity}"
+                           Style="{StaticResource DefaultTextBoxStyle}"
+                           FontSize="18" Foreground="#393939" TextWrapping="Wrap"/>
+            </ScrollViewer>
+            <Button Template="{StaticResource MainButtonTemplate}"
+                    Foreground="White" Background="#18AA7B"
+                    VerticalAlignment="Bottom" Margin="0 0 0 70"
+                    Focusable="False" FontWeight="SemiBold"
+                    FontSize="24"
+                    Width="338" Height="94" BorderBrush="Transparent" Content="Закрыть"
+                    Command="helpers:CommonCommands.ClosePopupCommand"/>
+        </Grid>
+    </Border>
+</UserControl>

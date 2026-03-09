@@ -1,0 +1,12 @@
+﻿{
+  "From": "",
+  "Password": "",
+  "Host": "",
+  "ImapHost": "",
+  "Quizzes": "Quizzes/QuizzesSettings.Json",
+  "Port": 0,
+  "ImapPort": 0,
+  "InactivityTime": 60,
+  "UserAgreement": "",
+  "SberUniversity": ""
+}

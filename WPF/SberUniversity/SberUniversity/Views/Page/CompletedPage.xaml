@@ -1,0 +1,43 @@
+﻿<Page x:Class="SberUniversity.Views.Page.CompletedPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SberUniversity.Views.Page"
+      xmlns:helpers="clr-namespace:SberUniversity.Helpers"
+      mc:Ignorable="d" 
+      Style="{StaticResource PageBackground}"
+      Title="CompletedPage">
+
+    <Grid Width="1080" Height="1920">
+        <StackPanel Margin="120 60">
+            <ContentPresenter ContentTemplate="{StaticResource LogoSberIcon}"
+                              Width="368px"
+                              HorizontalAlignment="Left"
+                              Margin="0 0 0 288"/>
+
+            <TextBlock Text="Ваши результаты успешно отправлены!"
+                       Style="{StaticResource TitleTextBoxStyle}"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"/>
+            <TextBlock Text="Спасибо за прохождение теста"
+                       Style="{StaticResource DefaultTextBoxStyle}"
+                       FontSize="36"
+                       Margin="0 63 0 95"
+                       TextAlignment="Center"/>
+            <Image Source="../../Resources/Images/SberQrCode.png" Width="655"/>
+            <Image Source="../../Resources/Images/SberCompletedPageQr.png" Width="655"
+                   Margin="0 95"/>
+            <Button Template="{StaticResource MainButtonTemplate}"
+                    Width="510" Height="122"
+                    Background="White"
+                    Foreground="{StaticResource ButtonTextColor}"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    Content="НА ГЛАВНУЮ"
+                    FontSize="36" FontWeight="SemiBold"
+                    Command="helpers:CommonCommands.NavigateCommand"
+                    CommandParameter="{x:Static helpers:PageTypes.StartPage}"/>
+        </StackPanel>
+    </Grid>
+</Page>

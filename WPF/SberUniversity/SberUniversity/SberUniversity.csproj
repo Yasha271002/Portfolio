@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\Frame 5 %281%29.png" />
+    <None Remove="Resources\Images\SberBackground.png" />
+    <None Remove="Resources\Images\SberCompletedPageQr.png" />
+    <None Remove="Resources\Images\SberLogo.png" />
+    <None Remove="Resources\Images\SberQ.png" />
+    <None Remove="Resources\Images\SberQrCode.png" />
+    <None Remove="Resources\Images\SliderCircle.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="EPPlus" Version="7.4.1" />
+    <PackageReference Include="MailKit" Version="4.15.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.142" />
+    <PackageReference Include="MimeKit" Version="4.15.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CommonControls">
+      <HintPath>Library\CommonControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Core">
+      <HintPath>Library\Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CustomKeyboard">
+      <HintPath>Library\CustomKeyboard.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Frame 5 (1).png" />
+    <Resource Include="Resources\Images\SberBackground.png" />
+    <Resource Include="Resources\Images\SberCompletedPageQr.png" />
+    <Resource Include="Resources\Images\SberLogo.png" />
+    <Resource Include="Resources\Images\SberQ.png" />
+    <Resource Include="Resources\Images\SberQrCode.png" />
+    <Resource Include="Resources\Images\SliderCircle.png" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:CustomKeyboard.Views.Controls;assembly=CustomKeyboard">
+    <ControlTemplate x:Key="MainButtonTemplate" TargetType="Button">
+        <Border Width="{TemplateBinding Width}"
+                Height="{TemplateBinding Height}"
+                Background="{TemplateBinding Background}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                CornerRadius="16">
+            <TextBlock FontSize="{TemplateBinding FontSize}"
+                       Foreground="{TemplateBinding Foreground}"
+                       Text="{TemplateBinding Content}"
+                       VerticalAlignment="Center"
+                       TextAlignment="Center" />
+        </Border>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type controls:KeyboardKeyButton}">
+        <Setter Property="HighlightedBackground" Value="#D9F2FF"/>
+        <Setter Property="HighlightedForeground" Value="#1D4459"/>
+        <Setter Property="Foreground" Value="#1D4459"/>
+        <Setter Property="Background" Value="#D9F2FF"/>
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+</ResourceDictionary>

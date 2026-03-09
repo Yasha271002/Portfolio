@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="SberUniversity.Views.Controls.ResultControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SberUniversity.Views.Controls"
+             xmlns:views="clr-namespace:SberUniversity.ViewModel.Views"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance views:ResultPageViewModel}">
+    <StackPanel Width="758">
+        <TextBlock Style="{StaticResource TitleTextBoxStyle}"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center">
+            <Run Text="Ваш результат"/>
+            <Run Text="{Binding Result.PointsCount}"/>
+            <Run Text="{Binding Points, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </TextBlock>
+        <TextBlock
+                   Style="{StaticResource DefaultTextBoxStyle}"
+                   TextWrapping="Wrap"
+                   FontSize="24" TextAlignment="Center"
+                   Margin="0 40">
+                <Run Text="{Binding Result.Description}"/>
+                <Run Text="{Binding Result.Words[0]}"/>
+                <Run Text="{Binding Result.Description2}"/>
+        </TextBlock>
+
+        <StackPanel>
+            <TextBlock 
+                   Style="{StaticResource TitleTextBoxStyle}" FontSize="32"
+                   TextWrapping="Wrap"
+                   TextAlignment="Left" Margin="0 0 0 16">
+                <Run Text="{Binding Result.Words[1]}"/>
+                <Run Text="{Binding Result.ResultUpgrade.FirstUpgradeTitle}"/>
+            </TextBlock>
+            <TextBlock Text="{Binding Result.ResultUpgrade.FirstUpgradeDescription}"
+                   Style="{StaticResource DefaultTextBoxStyle}"
+                   FontSize="18" TextWrapping="Wrap" TextAlignment="Left"/>
+        </StackPanel>
+
+        <StackPanel Margin="0 40">
+            <TextBlock
+                   Style="{StaticResource TitleTextBoxStyle}" FontSize="32"
+                   TextWrapping="Wrap" TextAlignment="Left" Margin="0 0 0 16">
+                <Run Text="{Binding Result.Words[2]}"/>
+                <Run Text="{Binding Result.ResultUpgrade.SecondUpgradeTitle}"/>
+            </TextBlock>
+            <TextBlock Text="{Binding Result.ResultUpgrade.SecondUpgradeDescription}"
+                   Style="{StaticResource DefaultTextBoxStyle}"
+                   FontSize="18" TextWrapping="Wrap" TextAlignment="Left"/>
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock 
+                   Style="{StaticResource TitleTextBoxStyle}" FontSize="32"
+                   TextWrapping="Wrap" TextAlignment="Left" Margin="0 0 0 16">
+                <Run Text="{Binding Result.Words[3]}"/>
+                <Run Text="{Binding Result.ResultUpgrade.LastUpgradeTitle}"/>
+            </TextBlock>
+            <TextBlock Text="{Binding Result.ResultUpgrade.LastUpgradeDescription}"
+                   Style="{StaticResource DefaultTextBoxStyle}"
+                   FontSize="18" TextWrapping="Wrap" TextAlignment="Left"/>
+        </StackPanel>
+
+    </StackPanel>
+</UserControl>
