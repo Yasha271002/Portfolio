@@ -23,8 +23,8 @@
 ### [SberUniversity](./project-1)
 **Стек:** C#, WPF, MVVM, EPPlus 
 Простое десктопное приложение для [Мероприятия]. Реализована простая архитектура, кастомные контролы, работа с Excel(EPPlus), работа с почтой при помощи Mimekit.  
-*<img width="782" height="281" alt="изображение" src="https://github.com/user-attachments/assets/2e7c6046-952c-4e83-a274-eae846a78895" />
-* кастомизация WPF (стили, триггеры, конвертеры, анимации).
+<img width="782" height="281" alt="изображение" src="https://github.com/user-attachments/assets/2e7c6046-952c-4e83-a274-eae846a78895" /> 
+Кастомизация WPF (стили, триггеры, конвертеры, анимации).
 
 ## 🧠 Опыт и подходы
 
