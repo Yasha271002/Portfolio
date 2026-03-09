@@ -1,0 +1,161 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:CustomKeyboard.Views.Controls;assembly=CustomKeyboard">
+    <DataTemplate x:Key="GrabButton">
+        <Border CornerRadius="3"
+                Width="248" Height="6"
+                Background="{StaticResource BackgroundGrabButton}" />
+    </DataTemplate>
+
+    <ControlTemplate x:Key="ContentPresenterButtonTemplate" TargetType="Button">
+        <Border Background="{TemplateBinding Background}"
+                CornerRadius="16" Padding="{TemplateBinding Padding}">
+            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+        </Border>
+    </ControlTemplate>
+    <ControlTemplate x:Key="SearchButton" TargetType="Button">
+        <Border Background="{TemplateBinding Background}"
+                CornerRadius="16" Padding="{TemplateBinding Padding}" Height="86">
+            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"
+                              ContentTemplate="{TemplateBinding ContentTemplate}" Width="58"/>
+        </Border>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
+        <Border Background="{TemplateBinding Background}"
+                CornerRadius="16" Padding="8">
+            <TextBlock Style="{StaticResource ObjectNameTextStyle}"
+                       FontSize="{TemplateBinding FontSize}"
+                       Foreground="{TemplateBinding Foreground}"
+                       Text="{TemplateBinding Content}"/>
+        </Border>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="BuildRoute" TargetType="Button">
+        <Border Padding="16" CornerRadius="16" 
+                Background="{StaticResource BackgroundCloseButton}" >
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ContentPresenter ContentTemplate="{StaticResource RouteIcon}" Height="24"
+                                  HorizontalAlignment="Left" />
+                <TextBlock Text="Маршрут"
+                           Style="{StaticResource ObjectNameTextStyle}"
+                           FontSize="20"
+                           FontWeight="Medium"
+                           Foreground="White"
+                           HorizontalAlignment="Left"
+                           Margin="8 0 0 0" />
+            </StackPanel>
+        </Border>
+    </ControlTemplate>
+    <ControlTemplate x:Key="CloseButton" TargetType="Button">
+        <Border Padding="16" CornerRadius="16" 
+                Background="{StaticResource BackgroundCloseButton}">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ContentPresenter ContentTemplate="{StaticResource CloseIcon}" Height="35"
+                                  HorizontalAlignment="Left"/>
+                <TextBlock Text="Закрыть"
+                           Style="{StaticResource ObjectNameTextStyle}"
+                           FontSize="20"
+                           FontWeight="Medium"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="8 0 0 0" />
+            </StackPanel>
+        </Border>
+    </ControlTemplate>
+    <ControlTemplate x:Key="DescriptionButton" TargetType="Button">
+        <Border Padding="16" CornerRadius="16" 
+                Background="{StaticResource BackgroundCloseButton}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ContentPresenter ContentTemplate="{StaticResource DescriptionIcons}" Height="24"
+                                  HorizontalAlignment="Left" />
+                <TextBlock Text="Открыть описание"
+                           Style="{StaticResource ObjectNameTextStyle}"
+                           FontSize="20"
+                           FontWeight="Medium"
+                           Foreground="White"
+                           HorizontalAlignment="Left"
+                           Margin="8 0 0 0" />
+            </StackPanel>
+        </Border>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type controls:KeyboardKeyButton}">
+        <Setter Property="HighlightedBackground" Value="#23394E" />
+        <Setter Property="HighlightedForeground" Value="#FFFFFF" />
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="Background" Value="#23394E" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontFamily" Value="{StaticResource Grandis}" />
+    </Style>
+
+    <ControlTemplate x:Key="SearchObjectButton" TargetType="Button">
+        <Border
+            BorderThickness="0 0 0 1" CornerRadius="16"
+            BorderBrush="#677686" Padding="16 ">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="{StaticResource BackgroundControl}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPressed}" Value="True">
+                            <Setter Property="Background" Value="{StaticResource DescriptionBackground}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsMouseOver}" Value="True">
+                            <Setter Property="Background" Value="{StaticResource DescriptionBackground}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <StackPanel Orientation="Horizontal">
+                <ContentPresenter ContentTemplate="{StaticResource PositionIcon}" Height="32" />
+                <TextBlock Style="{StaticResource ObjectNameTextStyle}"
+                           Foreground="{StaticResource ObjectNameForeground}"
+                           Text="{Binding Title}"
+                           Margin="8 0 0 0"
+                           FontSize="26" FontWeight="Medium" />
+            </StackPanel>
+        </Border>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="DoubleIconTemplate" TargetType="Button">
+        <Grid>
+            <Border BorderBrush="#CA2534" BorderThickness="3" Height="50" CornerRadius="3" Width="6"
+                    VerticalAlignment="Center" />
+            <Grid VerticalAlignment="Top" HorizontalAlignment="Center">
+                <Ellipse Fill="#CA2534" Width="24" Height="24" />
+                <Ellipse Width="12" Height="12" Fill="#23394E" />
+            </Grid>
+            <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <Ellipse Width="24" Height="24" Fill="#23394E" />
+                <Ellipse Width="12" Height="12" Fill="#CA2534" />
+            </Grid>
+        </Grid>
+    </ControlTemplate>
+
+
+    <Style TargetType="Button" x:Key="NextArrowButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="28" Background="#3F92B2" Width="86" Height="86" Margin="0 0 -38 0">
+                        <ContentPresenter ContentTemplate="{StaticResource NextIcon}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="48"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="BackArrowButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="28" Margin="-38 0 0 0" Background="#3F92B2" Width="86" Height="86">
+                        <ContentPresenter ContentTemplate="{StaticResource BackIcon}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="48"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

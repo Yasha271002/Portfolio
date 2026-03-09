@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTemplate TargetType="TextBox" x:Key="TextBoxTemplate">
+        <Border CornerRadius="16"
+                BorderThickness="2"
+                BorderBrush="#CA2534"
+                Background="{TemplateBinding Background}"
+                Padding="0">
+            <Grid>
+                <StackPanel Orientation="Horizontal" Margin="{TemplateBinding Padding}">
+                    <ContentPresenter ContentTemplate="{StaticResource SearchIcon}"
+                                      Margin="16" Width="36"/>
+                    <TextBlock
+                        Text="{TemplateBinding Tag}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        Margin="0 0 0 0">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text.Length,RelativeSource={RelativeSource FindAncestor,AncestorType=TextBox} }" Value="0">
+                                        <Setter Property="Visibility" Value="Visible"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </StackPanel>
+                <ScrollViewer
+                    Padding="0"
+                    Margin="68 0 0 0"
+                    x:Name="PART_ContentHost">
+                </ScrollViewer>
+                <Button Template="{StaticResource ContentPresenterButtonTemplate}"
+                        ContentTemplate="{DynamicResource CloseIcon}"
+                        Background="{StaticResource BackgroundCloseButton}"
+                        Command="{Binding CloseCommand}"
+                        Padding="8"
+                        Width="64" Height="64"
+                        Margin="856 0 0 0" />
+            </Grid>
+        </Border>
+    </ControlTemplate>
+</ResourceDictionary>

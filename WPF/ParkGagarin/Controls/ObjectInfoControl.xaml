@@ -1,0 +1,157 @@
+﻿<UserControl x:Class="GoToGagarin.View.Controls.ObjectInfoControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:GoToGagarin.ViewModel.Controls"
+             mc:Ignorable="d"
+             xmlns:models="clr-namespace:GoToGagarin.Model"
+             d:DataContext="{d:DesignInstance controls:ObjectInfoViewModel}">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding LoadedCommand}"
+                                   CommandParameter="{Binding ElementName=MainGrid}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type models:Paragraph}">
+            <Border Padding="16 24 16 16"
+                    CornerRadius="16"
+                    Background="{StaticResource DescriptionBackground}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource ObjectNameTextStyle}"
+                               FontSize="34" FontWeight="Bold" Text="{Binding Title}"
+                               Foreground="{StaticResource ObjectNameForeground}" Margin="0 0 0 24" />
+                    <TextBlock Style="{StaticResource ObjectNameTextStyle}"
+                               FontSize="20" FontWeight="Normal"
+                               Text="{Binding Description}"
+                               Foreground="{StaticResource DescriptionForeGround}" />
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid
+        x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="164" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="164" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="0 06 0 0" VerticalAlignment="Center">
+            <ContentPresenter ContentTemplate="{StaticResource MuseumIcon}" Width="64" Height="64" />
+            <TextBlock Text="{Binding MapVM.SelectObject.Title}"
+                       Style="{StaticResource ObjectNameTextStyle}"
+                       FontWeight="Bold" Margin="24 0" HorizontalAlignment="Center"
+                       TextAlignment="Center" Width="700" VerticalAlignment="Center"
+                       FontSize="40" Foreground="{StaticResource ObjectNameForeground}" />
+        </StackPanel>
+        <TabControl Grid.Row="1" Margin="32 32 32 0" >
+            <TabItem Header="Описание" IsSelected="{Binding SelectDescription}">
+                <Grid>
+                    <ScrollViewer>
+                        <ItemsControl ItemsSource="{Binding MapVM.SelectObject.Paragraphs}"
+                                      VerticalAlignment="Top">
+                            <ItemsControl.ItemContainerStyle>
+                                <Style TargetType="ContentPresenter">
+                                    <Setter Property="Margin" Value="0 0 0 32" />
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Фото" IsSelected="{Binding SelectPhoto}">
+                <ScrollViewer VerticalScrollBarVisibility="Visible" Style="{StaticResource BaseScrollViewerStyle}"
+                              Width="980">
+                    <ItemsControl
+                        ItemsSource="{Binding MapVM.SelectObject.Images}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Margin="0 32 0 0 " Width="952" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Command="{Binding DataContext.OpenContentSliderCommand,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    Width="472" Height="466">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Border Margin="2"
+                                                    CornerRadius="16">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="#3F92B2" Opacity="0.4" />
+                                                </Border.Background>
+                                                <Grid>
+                                                    <Border CornerRadius="16 " Height="466">
+                                                        <Border.Background>
+                                                            <ImageBrush ImageSource="{Binding Image}"
+                                                                        Stretch="UniformToFill" />
+                                                        </Border.Background>
+                                                        <Border.Style>
+                                                            <Style TargetType="Border">
+                                                                <Setter Property="Opacity" Value="0" />
+                                                                <Setter Property="Visibility" Value="Visible" />
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="Opacity" Value="0">
+                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                    </Trigger>
+                                                                    <EventTrigger RoutedEvent="Loaded">
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard TargetProperty="Opacity">
+                                                                                <DoubleAnimation To="1"
+                                                                                    Duration="0:0:0.5"
+                                                                                    BeginTime="0:0:0.5" />
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                    </Border>
+                                                    <Border CornerRadius="0 0 16 16" Height="60"
+                                                            VerticalAlignment="Bottom">
+                                                        <Border.Background>
+                                                            <SolidColorBrush Color="#3F92B2" Opacity="0.4" />
+                                                        </Border.Background>
+                                                        <TextBlock Style="{StaticResource ObjectNameTextStyle}"
+                                                                   Text="{Binding Title}"
+                                                                   VerticalAlignment="Center"
+                                                                   HorizontalAlignment="Center"
+                                                                   FontSize="16" FontWeight="Medium" Foreground="White" />
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" 
+                    Margin="64 0 64 32">
+            <Button Margin="0 0 16 0"
+                    VerticalAlignment="Bottom"
+                    Height="96" Width="306"
+                    Template="{StaticResource BuildRoute}"
+                    Command="{Binding NavigateCommand}" />
+            <Button Margin="0 0 16 0"
+                    VerticalAlignment="Bottom"
+                    Height="96" Width="306"
+                    Command="{Binding IsDraggingCommand}"
+                    Template="{StaticResource DescriptionButton}" />
+            <Button Template="{StaticResource CloseButton}"
+                    ContentTemplate="{DynamicResource CloseIcon}"
+                    Background="{StaticResource BackgroundCloseButton}"
+                    Padding="8" FontWeight="Medium" VerticalAlignment="Bottom"
+                    Command="{Binding CloseCommand}"
+                    Width="306" Height="96"  />
+        </StackPanel>
+    </Grid>
+</UserControl>
