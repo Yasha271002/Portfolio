@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="VolgaTermalBathsEnter.Views.Popups.ErrorPopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VolgaTermalBathsEnter.Views.Popups"
+             xmlns:popupContainers="clr-namespace:MainComponents.Popups.PopupContainers;assembly=MainComponents"
+             xmlns:popups="clr-namespace:VolgaTermalBathsEnter.ViewModels.Popups"
+             xmlns:components="clr-namespace:MainComponents.Components;assembly=MainComponents"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance popups:ErrorPopupViewModel}">
+    <popupContainers:OpacityPopupContainer>
+        <Border Style="{StaticResource PopupBorderStyle}"
+                Padding="47 140"
+                Width="1022"
+                Height="887">
+            <StackPanel>
+                <Image Source="/Resources/Images/Error.png" Width="180" Height="180"/>
+
+                <TextBlock Style="{StaticResource TitleTextBlockStyle}"
+                           Text="Произошла ошибка" TextWrapping="Wrap"
+                           Width="768"
+                           Margin="0 32 0 32"/>
+                <TextBlock Style="{StaticResource TextBlockFontSize20}" 
+                           Text="Пожалуйста, вернитесь назад и попробуйте снова"
+                           FontSize="28"
+                           Width="396"/>
+                <StackPanel Orientation="Horizontal" Margin="0 99 0 0">
+                    <components:RoundedButton Style="{StaticResource CommonButtonStyle}"
+                            Width="448"
+                            Height="96"
+                            CornerRadius="24"
+                            Command="{Binding MainPageCommand}"
+                            BorderThickness="2"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Foreground="{StaticResource MainColorBrush}"
+                            Background="Transparent"
+                            BorderBrush="{StaticResource MainColorBrush}"
+                            Content="На главную страницу"/>
+                    <components:RoundedButton Style="{StaticResource CommonButtonStyle}"
+                            Width="448"
+                            Height="96"
+                            Margin="32 0 0 0"
+                            BorderThickness="0"
+                            CornerRadius="24"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Background="{StaticResource MainColorBrush}"
+                            Foreground="White"
+                            Content="Назад"
+                            Command="{Binding CloseContainerCommand}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </popupContainers:OpacityPopupContainer>
+</UserControl>

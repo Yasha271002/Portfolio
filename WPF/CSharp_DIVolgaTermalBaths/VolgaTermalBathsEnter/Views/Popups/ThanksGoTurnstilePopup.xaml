@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="VolgaTermalBathsEnter.Views.Popups.ThanksGoTurnstilePopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:popupContainers="clr-namespace:MainComponents.Popups.PopupContainers;assembly=MainComponents"
+             xmlns:popups="clr-namespace:VolgaTermalBathsEnter.ViewModels.Popups"
+             mc:Ignorable="d"
+             d:DesignHeight="959" d:DesignWidth="1022"
+             d:DataContext="{d:DesignInstance popups:ThanksGoTurnstilePopupViewModel}">
+    <popupContainers:ScaleContainer>
+        <Border Style="{StaticResource PopupBorderStyle}"
+                Width="1022"
+                Height="959">
+            <StackPanel>
+                <ContentPresenter
+                    ContentTemplate="{StaticResource SummerSwimmingLogo}"
+                    Width="259"
+                    Margin="0 140 0 32" />
+                <TextBlock
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    Text="Спасибо! Пройдите к турникету"
+                    Width="610"
+                    Margin="0 0 0 76 " />
+                <Button
+                    Template="{StaticResource ThermalRegisterButton}"
+                    Style="{StaticResource ButtonPopupStyle}"
+                    Content="На главную"
+                    Command="{Binding WelcomeUserNavigationCommand}" />
+            </StackPanel>
+        </Border>
+    </popupContainers:ScaleContainer>
+</UserControl>

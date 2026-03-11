@@ -1,0 +1,262 @@
+﻿<UserControl x:Class="VolgaTermalBathsEnter.Views.Pages.PaidTicketsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:VolgaTermalBathsEnter.Views.Pages"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:pages="clr-namespace:VolgaTermalBathsEnter.ViewModels.Pages"
+             mc:Ignorable="d"
+             Style="{StaticResource TicketPageBackgroundStyle}"
+             d:DataContext="{d:DesignInstance pages:PaidTicketViewModel}"
+             d:DesignHeight="1920" d:DesignWidth="1080">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction
+                Command="{Binding LoadedCommand}" />
+        </b:EventTrigger>
+        <b:EventTrigger EventName="Unloaded">
+            <b:InvokeCommandAction
+                Command="{Binding UnloadedCommand}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+    <StackPanel>
+        <ContentPresenter
+            ContentTemplate="{StaticResource ThermalLogo}"
+            Width="292"
+            HorizontalAlignment="Left"
+            Margin="360 235 0 71" />
+        <TextBlock
+            Style="{StaticResource TitleTextBlockStyle}"
+            Text="Выберите билет для активации"
+            Width="656"
+            Margin="0 0 0 71" />
+        <Border
+            Background="{StaticResource White}"
+            Height="113"
+            BorderThickness="1"
+            Margin="30 0 30 0"
+            CornerRadius="24 24 0 0"
+            BorderBrush="{StaticResource White}">
+            <Grid>
+                <Border
+                    Width="23.77"
+                    Height="113"
+                    HorizontalAlignment="Left"
+                    Background="{StaticResource OrangeBorderBrush}"
+                    CornerRadius="24 0 0 0"
+                    Margin="-1" />
+                <TextBlock
+                    Style="{StaticResource TextBlockFontWeightNormal}"
+                    Text="Ваши билеты"
+                    Foreground="{StaticResource MainColorBrush}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="46 0 0 0" />
+            </Grid>
+        </Border>
+        <Border
+            Background="{StaticResource White}"
+            Margin="30 20 30 0"
+            CornerRadius="0 0 30 30">
+            <Grid Width="1042"
+                  Height="856">
+                <fa:ImageAwesome Icon="Spinner" Spin="True" SpinDuration="4" Width="100"
+                                 Foreground="{StaticResource MainColorBrush}"
+                                 VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <fa:ImageAwesome.Style>
+                        <Style TargetType="fa:ImageAwesome">
+                            <Setter Property="Visibility" Value="Visible" />
+                            <Setter Property="Opacity" Value="1" />
+                            <Style.Triggers>
+                                <Trigger
+                                    Property="Opacity"
+                                    Value="0">
+                                    <Setter Property="Visibility" Value="Hidden" />
+                                </Trigger>
+                                <DataTrigger Binding="{Binding IsAllTicketApproved}" Value="false">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard TargetProperty="Opacity">
+                                                <DoubleAnimation To="1"
+                                                                 Duration="0:0:1.0"
+                                                                 BeginTime="0:0:1.0" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard TargetProperty="Opacity">
+                                                <DoubleAnimation To="0"
+                                                                 Duration="0:0:1.0"
+                                                                 BeginTime="0:0:1.0" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </fa:ImageAwesome.Style>
+                </fa:ImageAwesome>
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Auto"
+                              PanningMode="VerticalOnly"
+                              Height="338"
+                              VerticalAlignment="Top"
+                              Width="950"
+                              Margin="46 60 46 80"
+                              Padding="0 0 0 -8">
+                    <ScrollViewer.Resources>
+                        <Style TargetType="ScrollBar"
+                               BasedOn="{StaticResource CitiesScrollBarStyle}" />
+                    </ScrollViewer.Resources>
+                    <ItemsControl
+                        ItemsSource="{Binding TicketModel.Parameters,
+                                        Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.Style>
+                            <Style TargetType="ItemsControl">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Setter Property="Opacity" Value="0" />
+                                <Style.Triggers>
+                                    <Trigger
+                                        Property="Opacity"
+                                        Value="0">
+                                        <Setter Property="Visibility" Value="Hidden" />
+                                    </Trigger>
+                                    <!--TODO-->
+                                    <DataTrigger Binding="{Binding IsAllTicketApproved}" Value="false">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard TargetProperty="Opacity">
+                                                    <DoubleAnimation To="0"
+                                                                     Duration="0:0:1.0"
+                                                                     BeginTime="0:0:1.0" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard TargetProperty="Opacity">
+                                                    <DoubleAnimation To="1"
+                                                                     Duration="0:0:1.0"
+                                                                     BeginTime="0:0:1.0" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ItemsControl.Style>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Width="930" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton
+                                    GroupName="1"
+                                    Width="449" Height="68"
+                                    Margin="8 0 8 8">
+                                    <RadioButton.Style>
+                                        <Style TargetType="RadioButton">
+                                            <Setter Property="IsChecked"
+                                                    Value="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                            <Setter Property="Foreground"
+                                                    Value="{StaticResource LightGrayColorBrush}" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Key, Converter={StaticResource StringNotEmptyToBoolConverter}}"
+                                                             Value="True">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                    <Setter Property="Opacity" Value="0.35"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource LightGrayColorBrush}"/>
+                                                </DataTrigger>
+
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter Property="Foreground"
+                                                            Value="{StaticResource OrangeBorderBrush}" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </RadioButton.Style>
+                                    <RadioButton.Template>
+                                        <ControlTemplate TargetType="RadioButton">
+                                            <Border BorderBrush="{TemplateBinding Foreground}"
+                                                    Background="Transparent"
+                                                    BorderThickness="2"
+                                                    CornerRadius="8">
+                                                <TextBlock Style="{StaticResource TextBlockFontSize20}"
+                                                           FontSize="18"
+                                                           Foreground="{TemplateBinding Foreground}"
+                                                           VerticalAlignment="Center"
+                                                           HorizontalAlignment="Center"
+                                                           TextWrapping="Wrap">
+                                                    <Run Text="{Binding Ticket}" />
+                                                </TextBlock>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </RadioButton.Template>
+                                </RadioButton>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+                <StackPanel VerticalAlignment="Bottom"
+                            Width="448" Height="288"
+                            Margin="0 0 0 50">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Visible" />
+                            <Setter Property="Opacity" Value="0" />
+                            <Style.Triggers>
+                                <Trigger Property="Opacity"
+                                         Value="0">
+                                    <Setter Property="Visibility" Value="Hidden" />
+                                </Trigger>
+                                <DataTrigger Binding="{Binding IsAllTicketApproved}" Value="False">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard TargetProperty="Opacity">
+                                                <DoubleAnimation To="0"
+                                                                 Duration="0:0:1.0"
+                                                                 BeginTime="0:0:1.0" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard TargetProperty="Opacity">
+                                                <DoubleAnimation To="1"
+                                                                 Duration="0:0:1.0"
+                                                                 BeginTime="0:0:1.0" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <Button Template="{StaticResource ThermalRegisterButton}"
+                            Style="{StaticResource ButtonPopupStyle}"
+                            Height="80"
+                            Background="{StaticResource MainColorBrush}"
+                            Foreground="{StaticResource White}"
+                            Content="Выбрать билет"
+                            Command="{Binding GoToScanBraceletCommand}" />
+                    <Button Template="{StaticResource ThermalRegisterButton}"
+                            Style="{StaticResource ButtonPopupStyle}"
+                            Margin="0 24 0 24"
+                            Height="80"
+                            Content="Билет на другое время"
+                            Command="{Binding SelectedTicketPageNavigationCommand}" />
+                    <Button Template="{StaticResource ThermalRegisterButton}"
+                            Style="{StaticResource ButtonPopupStyle}"
+                            Height="80"
+                            Content="Назад"
+                            Command="{Binding WelcomeUserNavigationCommand}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,199 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="clr-namespace:MainComponents.Components;assembly=MainComponents">
+
+
+    <Style x:Key="CommonButtonStyle" TargetType="components:RoundedButton">
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="CornerRadius" Value="24" />
+        <Setter Property="Foreground" Value="{StaticResource White}" />
+        <Setter Property="FontFamily" Value="{StaticResource DinPro}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="components:RoundedButton">
+                    <Border
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            ContentTemplate="{TemplateBinding Content}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="GreenButtonStyle"
+        BasedOn="{StaticResource CommonButtonStyle}"
+        TargetType="components:RoundedButton">
+        <Setter Property="Background" Value="{StaticResource MainColorBrush}" />
+    </Style>
+
+    <Style
+        x:Key="GreenAndGrayButtonStyle"
+        BasedOn="{StaticResource GreenButtonStyle}"
+        TargetType="components:RoundedButton">
+        <Setter Property="IsEnabled" Value="True" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding CanContinue}" Value="False">
+                <Setter Property="Background" Value="{StaticResource E2E2E2}" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="IsEnabled" Value="False" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
+        x:Key="TransparentButtonStyle"
+        BasedOn="{StaticResource CommonButtonStyle}"
+        TargetType="components:RoundedButton">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderBrush" Value="{StaticResource MainColorBrush}" />
+        <Setter Property="BorderThickness" Value="3" />
+        <Setter Property="Width" Value="448" />
+        <Setter Property="Height" Value="96" />
+        <Setter Property="Foreground" Value="{StaticResource MainColorBrush}" />
+    </Style>
+
+    <Style x:Key="BaseKeyboardButtonStyle" TargetType="components:RoundedButton">
+        <Setter Property="CornerRadius" Value="8" />
+
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{StaticResource 303030}" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontFamily" Value="{StaticResource DinPro}" />
+        <Setter Property="RenderTransformOrigin" Value="0.5 0.5" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleX="1" ScaleY="1" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="PinPadButton" TargetType="Button">
+        <Border
+            Width="96"
+            Height="96"
+            Background="{DynamicResource White}"
+            BorderThickness="1"
+            CornerRadius="16">
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="32"
+                Foreground="{DynamicResource 303030}"
+                Style="{DynamicResource TextBlockFontWeightNormal}"
+                Text="{TemplateBinding Content}" />
+        </Border>
+    </ControlTemplate>
+    <ControlTemplate x:Key="PinPadBackButton">
+        <Border
+            Width="208"
+            Height="96"
+            Background="{DynamicResource White}"
+            BorderThickness="1"
+            CornerRadius="16">
+            <ContentPresenter
+                Width="48"
+                Height="24"
+                ContentTemplate="{DynamicResource BackPinPadLogo}" />
+        </Border>
+    </ControlTemplate>
+
+    <Style x:Key="ButtonPopupStyle" TargetType="Button">
+        <Setter Property="Width" Value="448" />
+        <Setter Property="Height" Value="96" />
+        <Setter Property="Foreground" Value="{StaticResource MainColorBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{StaticResource MainColorBrush}" />
+        <Setter Property="BorderThickness" Value="3" />
+    </Style>
+
+    <ControlTemplate x:Key="ThermalRegisterButton" TargetType="Button">
+        <Border
+            Name="Border"
+            Width="{TemplateBinding Width}"
+            Height="{TemplateBinding Height}"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="1"
+            CornerRadius="24">
+            <TextBlock
+                Foreground="{TemplateBinding Foreground}"
+                Style="{StaticResource ButtonTextStyle}"
+                Text="{TemplateBinding Content}" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource E2E2E2}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="AddDataButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border
+                        Width="180"
+                        Height="50"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="24">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Foreground="{TemplateBinding Foreground}"
+                            Style="{DynamicResource TextBlockFontWeightNormal}"
+                            Text="{TemplateBinding Content}"
+                            TextTrimming="WordEllipsis" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="ButtonAddDataStyle"
+        BasedOn="{StaticResource AddDataButtonStyle}"
+        TargetType="Button">
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Content" Value="Ввести ФИО" />
+        <Setter Property="Background" Value="{DynamicResource MainColorBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource White}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="IsEnabled" Value="True" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding TicketPersonalInfo.FirstName, Converter={StaticResource IsNullConverter}}" Value="False">
+                <Setter Property="Content" Value="{Binding TicketPersonalInfo.FullName}"/>
+                <Setter Property="Background" Value="{StaticResource White}" />
+                <Setter Property="Foreground" Value="{StaticResource LightGrayColorBrush}" />
+                <Setter Property="BorderBrush" Value="{StaticResource LightGrayColorBrush}" />
+                <Setter Property="IsEnabled" Value="False" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
+        x:Key="ButtonEmailStyle"
+        TargetType="components:RoundedButton">
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{StaticResource 303030}"/>
+        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="FontFamily" Value="{StaticResource DinPro}"/>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,218 @@
+﻿<UserControl
+    x:Class="VolgaTermalBathsEnter.Views.Pages.WelcomeUserPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:local="clr-namespace:VolgaTermalBathsEnter.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:VolgaTermalBathsEnter.ViewModels.Pages"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:components="clr-namespace:MainComponents.Components;assembly=MainComponents"
+    d:DataContext="{d:DesignInstance pages:WelcomeUserViewModel}"
+    d:DesignHeight="1920"
+    d:DesignWidth="1080"
+    Style="{StaticResource ThermalRegisterBackgroundStyle}"
+    mc:Ignorable="d">
+    <Grid>
+        <Border Background="{StaticResource WhiteBrush}"
+                CornerRadius="0 0 24 24"
+                VerticalAlignment="Center"
+                Margin="0 405 0 0"
+                Height="148" Width="1022">
+            <components:RoundedButton
+                Margin="0 0 0 0"
+                Command="{Binding GoBackCommand}"
+                Content="Назад"
+                Style="{StaticResource TransparentButtonStyle}" />
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <TranslateTransform x:Name="Transform" Y="0" />
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsCodeSent}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y"
+                                                         To="124"
+                                                         Duration="0:0:0.75">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y"
+                                                         To="0"
+                                                         Duration="0:0:0.75">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+        <Border
+            Width="1022"
+            Height="844"
+            Margin="0 0 0 291"
+            Style="{StaticResource ThermalRegisterBorderStyle}">
+            <Grid>
+                <Grid>
+                    <StackPanel>
+                        <ContentPresenter
+                            Width="292"
+                            Height="176"
+                            Margin="350,64,0,16"
+                            HorizontalAlignment="Left"
+                            ContentTemplate="{StaticResource ThermalLogo}" />
+                        <TextBlock
+                            Width="539"
+                            Style="{StaticResource WelcomeTextBlock}"
+                            Text="Добро пожаловать!" />
+                        <Grid>
+                            <StackPanel Style="{StaticResource WelcomeNumberStage}">
+                                <TextBlock
+                                    Width="695"
+                                    Margin="0,32,0,64"
+                                    Style="{DynamicResource TextBlockFontWeightNormal}"
+                                    Text="Введите свой номер телефона" />
+                                <xctk:MaskedTextBox
+                                    x:Name="PhoneNumber"
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Mask="+7 (000) 000-00-00"
+                                    PromptChar="_"
+                                    Style="{DynamicResource TextBoxStyle}"
+                                    Template="{StaticResource UserRegisterTextBox}"
+                                    TextAlignment="Left"
+                                    Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}" />
+                                <TextBlock
+                                    Margin="190,-10,0,0"
+                                    HorizontalAlignment="Left"
+                                    FontSize="18"
+                                    Foreground="Red"
+                                    Style="{DynamicResource TextBlockFontWeightNormal}"
+                                    Text="{Binding PhoneNumberError}"
+                                    Visibility="{Binding PhoneNumberError, Converter={StaticResource StringIsNullOrEmptyToVisibilityConverter}}" />
+                            </StackPanel>
+                            <StackPanel Style="{StaticResource WelcomeVerificationCodeStage}">
+                                <TextBlock
+                                    Width="695"
+                                    Margin="0,32,0,32"
+                                    Style="{DynamicResource TextBlockFontWeightNormal}"
+                                    Text="Введите код" />
+                                <xctk:MaskedTextBox
+                                    x:Name="Code"
+                                    Mask="00-00"
+                                    PromptChar="_"
+                                    Style="{DynamicResource TextBoxStyle}"
+                                    Template="{StaticResource UserRegisterTextBox}"
+                                    TextAlignment="Center"
+                                    Text="{Binding VerificationCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}" />
+                                <TextBlock
+                                    Margin="0,15,0,0"
+                                    HorizontalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="Red"
+                                    Style="{DynamicResource TextBlockFontWeightNormal}"
+                                    Text="{Binding VerificationCodeError}"
+                                    Visibility="{Binding VerificationCodeError, Converter={StaticResource StringIsNullOrEmptyToVisibilityConverter}}" />
+                            </StackPanel>
+                            <StackPanel Style="{StaticResource WelcomeLoadingStage}">
+                                <TextBlock
+                                    Width="695"
+                                    Margin="0,32,0,32"
+                                    Style="{DynamicResource TextBlockFontWeightNormal}"
+                                    Text="Пожалуйста, подождите" />
+                                <fa:ImageAwesome
+                                    Width="100"
+                                    Foreground="{DynamicResource MainColorBrush}"
+                                    Icon="Spinner"
+                                    Spin="True"
+                                    SpinDuration="4" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                    <components:RoundedButton
+                        Width="448"
+                        Height="96"
+                        Margin="0,0,0,40"
+                        VerticalAlignment="Bottom"
+                        Content="Ввести">
+                        <components:RoundedButton.Style>
+                            <Style BasedOn="{StaticResource GreenButtonStyle}" TargetType="components:RoundedButton">
+                                <Setter Property="Command" Value="{Binding VerifyNumberCommand}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsCodeSent}" Value="True">
+                                        <Setter Property="Command" Value="{Binding VerifyCodeCommand}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </components:RoundedButton.Style>
+                    </components:RoundedButton>
+                </Grid>
+            </Grid>
+        </Border>
+        <Grid
+            Margin="0 1380 0 60"
+            Panel.ZIndex="1"
+            Width="368"
+            Height="480">
+            <Border
+                Style="{DynamicResource PinPadBorder}" />
+            <Grid
+                Margin="24">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Grid.Row="0" Template="{StaticResource PinPadButton}" Content="1"
+                        Command="{Binding PinPadButtonPressedCommand}" CommandParameter="1" />
+                <Button Grid.Column="1" Grid.Row="0" Template="{StaticResource PinPadButton}" Content="2"
+                        Command="{Binding PinPadButtonPressedCommand}" CommandParameter="2" />
+                <Button Grid.Column="2" Grid.Row="0" Template="{StaticResource PinPadButton}" Content="3"
+                        Command="{Binding PinPadButtonPressedCommand}" CommandParameter="3" />
+                <Button Grid.Column="0" Grid.Row="1" Template="{StaticResource PinPadButton}" Content="4"
+                        Command="{Binding PinPadButtonPressedCommand}" CommandParameter="4" />
+                <Button Grid.Column="1" Grid.Row="1" Template="{StaticResource PinPadButton}" Content="5"
+                        Command="{Binding PinPadButtonPressedCommand}" CommandParameter="5" />
+                <Button Grid.Column="2" Grid.Row="1" Template="{StaticResource PinPadButton}" Content="6"
+                        Command="{Binding PinPadButtonPressedCommand}" CommandParameter="6" />
+                <Button Grid.Column="0" Grid.Row="2" Template="{StaticResource PinPadButton}" Content="7"
+                        Command="{Binding PinPadButtonPressedCommand}" CommandParameter="7" />
+                <Button Grid.Column="1" Grid.Row="2" Template="{StaticResource PinPadButton}" Content="8"
+                        Command="{Binding PinPadButtonPressedCommand}" CommandParameter="8" />
+                <Button Grid.Column="2" Grid.Row="2" Template="{StaticResource PinPadButton}" Content="9"
+                        Command="{Binding PinPadButtonPressedCommand}" CommandParameter="9" />
+                <Button Grid.Column="0" Grid.Row="3" Template="{StaticResource PinPadButton}" Content="0"
+                        Command="{Binding PinPadButtonPressedCommand}" CommandParameter="0" />
+                <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Template="{StaticResource PinPadBackButton}"
+                        Content="Back" Command="{Binding BackPinPadCommand}" />
+            </Grid>
+
+        </Grid>
+    </Grid>
+</UserControl>

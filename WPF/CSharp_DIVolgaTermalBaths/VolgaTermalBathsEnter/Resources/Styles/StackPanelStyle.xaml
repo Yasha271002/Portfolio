@@ -1,0 +1,94 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Resources/Styles/Storyboardes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Storyboard x:Key="FadeInAnimation">
+        <DoubleAnimation
+            EasingFunction="{StaticResource PowerEase}"
+            Storyboard.TargetProperty="Opacity"
+            To="1"
+            Duration="{StaticResource Duration}" />
+    </Storyboard>
+    <Storyboard x:Key="FadeOutAnimation">
+        <DoubleAnimation
+            EasingFunction="{StaticResource PowerEase}"
+            Storyboard.TargetProperty="Opacity"
+            To="0"
+            Duration="{StaticResource Duration}" />
+    </Storyboard>
+
+    <Style x:Key="BaseStackPanelStyle" TargetType="StackPanel">
+        <Setter Property="Visibility" Value="Visible" />
+        <Setter Property="Opacity" Value="0" />
+        <Style.Triggers>
+            <Trigger Property="Opacity" Value="0">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="WelcomeNumberStage" TargetType="StackPanel" BasedOn="{StaticResource BaseStackPanelStyle}">
+       
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsCodeSent}" Value="False">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource FadeInAnimation}" />
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard Storyboard="{StaticResource FadeOutAnimation}" />
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="WelcomeVerificationCodeStage" TargetType="StackPanel" BasedOn="{StaticResource BaseStackPanelStyle}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsCodeSent}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource FadeInAnimation}" />
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard Storyboard="{StaticResource FadeOutAnimation}" />
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsCodeVerification}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource FadeOutAnimation}" />
+                </DataTrigger.EnterActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="WelcomeLoadingStage" TargetType="StackPanel" BasedOn="{StaticResource BaseStackPanelStyle}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsCodeVerification}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource FadeInAnimation}" />
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard Storyboard="{StaticResource FadeOutAnimation}" />
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="AnimatedStackPanelStyle" TargetType="StackPanel" BasedOn="{StaticResource BaseStackPanelStyle}">
+        <Style.Triggers>
+            <Trigger Property="Opacity" Value="0">
+                <Setter Property="Visibility" Value="Hidden" />
+            </Trigger>
+            <DataTrigger Binding="{Binding IsAllTicketApproved}" Value="false">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource FadeOutAnimation}"/>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard Storyboard="{StaticResource FadeInAnimation}" />
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

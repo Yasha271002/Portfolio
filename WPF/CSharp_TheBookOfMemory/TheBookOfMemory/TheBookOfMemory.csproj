@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+	  <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Resources\Fonts\**" />
+    <EmbeddedResource Remove="Resources\Fonts\**" />
+    <None Remove="Resources\Fonts\**" />
+    <Page Remove="Resources\Fonts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\DataTemplates\PopupDataTemplates.xaml~RF13aa2e0.TMP" />
+    <None Remove="Resources\Images\ArrowUp.png" />
+    <None Remove="Resources\Images\Background.png" />
+    <None Remove="Resources\Images\Cul.png" />
+    <None Remove="Resources\Images\Culture.png" />
+    <None Remove="Resources\Images\Filter.png" />
+    <None Remove="Resources\Images\Logo.png" />
+    <None Remove="Resources\Images\Plug.png" />
+    <None Remove="Resources\Images\Text.png" />
+    <None Remove="Resources\Images\Win.png" />
+    <None Remove="Resources\Styles\ScrollViewerStyle.xaml~RFeb7f6a.TMP" />
+    <None Remove="ViewModels\Popups\HistoryPopupViewModel.cs~RF1383b84.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="7.2.1" />
+    <PackageReference Include="Refit.Newtonsoft.Json" Version="7.2.1" />
+    <PackageReference Include="Serilog" Version="4.1.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.4" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MainComponents">
+      <HintPath>Libs\MainComponents.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmNavigationLib">
+      <HintPath>Libs\MvvmNavigationLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\ArrowUp.png" />
+    <Resource Include="Resources\Images\Background.png" />
+    <Resource Include="Resources\Images\Cul.png" />
+    <Resource Include="Resources\Images\Culture.png" />
+    <Resource Include="Resources\Images\Filter.png" />
+    <Resource Include="Resources\Images\Logo.png" />
+    <Resource Include="Resources\Images\Plug.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Text.png" />
+    <Resource Include="Resources\Images\Win.png" />
+  </ItemGroup>
+
+</Project>

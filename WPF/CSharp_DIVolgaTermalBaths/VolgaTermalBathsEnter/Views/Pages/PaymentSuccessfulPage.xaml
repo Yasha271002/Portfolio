@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="VolgaTermalBathsEnter.Views.Pages.PaymentSuccessfulPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:pages="clr-namespace:VolgaTermalBathsEnter.ViewModels.Pages"
+             mc:Ignorable="d"
+             Style="{StaticResource TicketPageBackgroundStyle}"
+             d:DataContext="{d:DesignInstance pages:PaymentSuccessfulPageViewModel}"
+             d:DesignHeight="1920" d:DesignWidth="1080">
+    <Grid>
+        <ContentPresenter ContentTemplate="{StaticResource ThermalLogo}"
+                          Width="292"
+                          Height="176"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          Margin="360 60 0 0" />
+
+        <Grid VerticalAlignment="Center"
+              HorizontalAlignment="Center">
+            <Border Style="{StaticResource PopupBorderStyle}"
+                    Width="1022"
+                    Height="887">
+                <StackPanel VerticalAlignment="Center">
+                    <ContentPresenter
+                        ContentTemplate="{StaticResource SummerSwimmingLogo}"
+                        Width="259" />
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}"
+                               Text="Оплата прошла успешно"
+                               Width="610"
+                               Margin="0 32 0 76" />
+                    <Button Template="{StaticResource ThermalRegisterButton}"
+                            Width="448"
+                            Height="96"
+                            Content="Активировать билет"
+                            Foreground="{StaticResource White}"
+                            BorderBrush="Transparent"
+                            Background="{StaticResource MainColorBrush}"
+                            Command="{Binding PaidTicketNavigationCommand}" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

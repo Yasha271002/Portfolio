@@ -1,0 +1,120 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Fonts\dinpro.otf" />
+    <None Remove="Resources\Fonts\dinpro_black.otf" />
+    <None Remove="Resources\Fonts\dinpro_blackitalic.otf" />
+    <None Remove="Resources\Fonts\dinpro_bold.otf" />
+    <None Remove="Resources\Fonts\dinpro_bolditalic.otf" />
+    <None Remove="Resources\Fonts\dinpro_condensedblack.otf" />
+    <None Remove="Resources\Fonts\dinpro_condensedblackitalic.otf" />
+    <None Remove="Resources\Fonts\dinpro_condensedbold.otf" />
+    <None Remove="Resources\Fonts\dinpro_condensedbolditalic.otf" />
+    <None Remove="Resources\Fonts\dinpro_condenseditalic.otf" />
+    <None Remove="Resources\Fonts\dinpro_condensedlight.otf" />
+    <None Remove="Resources\Fonts\dinpro_condensedlightitalic.otf" />
+    <None Remove="Resources\Fonts\dinpro_condensedmedium.otf" />
+    <None Remove="Resources\Fonts\dinpro_condensedmediumitalic.otf" />
+    <None Remove="Resources\Fonts\dinpro_condensedregular.otf" />
+    <None Remove="Resources\Fonts\dinpro_italic.otf" />
+    <None Remove="Resources\Fonts\dinpro_light.otf" />
+    <None Remove="Resources\Fonts\dinpro_lightitalic.ttf" />
+    <None Remove="Resources\Fonts\dinpro_medium.otf" />
+    <None Remove="Resources\Fonts\dinpro_mediumitalic.otf" />
+    <None Remove="Resources\Images\arrow.svg" />
+    <None Remove="Resources\Images\BackgroundApi.png" />
+    <None Remove="Resources\Images\Error.png" />
+    <None Remove="Resources\Images\MainBackground.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25104.5739" />
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="7.2.1" />
+    <PackageReference Include="Refit.Newtonsoft.Json" Version="7.2.1" />
+    <PackageReference Include="Serilog" Version="4.1.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.4" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="SharpVectors" Version="1.8.5" />
+    <PackageReference Include="System.IO" Version="4.3.0" />
+    <PackageReference Include="System.IO.Ports" Version="9.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CustomKeyboard">
+      <HintPath>Libs\CustomKeyboard.dll</HintPath>
+      <Private></Private>
+    </Reference>
+    <Reference Include="FreeKassaPayOnlineFramework">
+      <HintPath>Libs\FreeKassaPayOnlineFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MainComponents">
+      <HintPath>Libs\MainComponents.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmNavigationLib">
+      <HintPath>Libs\MvvmNavigationLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="cities.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="configKassa.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Client\User\Price\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Fonts\dinpro.otf" />
+    <Resource Include="Resources\Fonts\dinpro_black.otf" />
+    <Resource Include="Resources\Fonts\dinpro_blackitalic.otf" />
+    <Resource Include="Resources\Fonts\dinpro_bold.otf" />
+    <Resource Include="Resources\Fonts\dinpro_bolditalic.otf" />
+    <Resource Include="Resources\Fonts\dinpro_condensedblack.otf" />
+    <Resource Include="Resources\Fonts\dinpro_condensedblackitalic.otf" />
+    <Resource Include="Resources\Fonts\dinpro_condensedbold.otf" />
+    <Resource Include="Resources\Fonts\dinpro_condensedbolditalic.otf" />
+    <Resource Include="Resources\Fonts\dinpro_condenseditalic.otf" />
+    <Resource Include="Resources\Fonts\dinpro_condensedlight.otf" />
+    <Resource Include="Resources\Fonts\dinpro_condensedlightitalic.otf" />
+    <Resource Include="Resources\Fonts\dinpro_condensedmedium.otf" />
+    <Resource Include="Resources\Fonts\dinpro_condensedmediumitalic.otf" />
+    <Resource Include="Resources\Fonts\dinpro_condensedregular.otf" />
+    <Resource Include="Resources\Fonts\dinpro_italic.otf" />
+    <Resource Include="Resources\Fonts\dinpro_light.otf" />
+    <Resource Include="Resources\Fonts\dinpro_lightitalic.ttf" />
+    <Resource Include="Resources\Fonts\dinpro_medium.otf" />
+    <Resource Include="Resources\Fonts\dinpro_mediumitalic.otf" />
+    <Resource Include="Resources\Images\arrow.svg" />
+    <Resource Include="Resources\Images\BackgroundApi.png" />
+    <Resource Include="Resources\Images\Clear.svg" />
+    <Resource Include="Resources\Images\Error.png" />
+    <Resource Include="Resources\Images\MainBackground.png" />
+    <Folder Include="Models\Client\Settings\SmsSettings\" />
+    <Folder Include="Resources\Fonts\" />
+  </ItemGroup>
+
+</Project>

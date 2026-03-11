@@ -1,0 +1,27 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:pages="clr-namespace:VolgaTermalBathsEnter.ViewModels.Pages"
+    xmlns:pages1="clr-namespace:VolgaTermalBathsEnter.Views.Pages"
+    xmlns:popups="clr-namespace:VolgaTermalBathsEnter.ViewModels.Popups"
+    xmlns:popups1="clr-namespace:VolgaTermalBathsEnter.Views.Popups">
+
+    <DataTemplate DataType="{x:Type pages:WelcomeUserViewModel}">
+        <pages1:WelcomeUserPage DataContext="{Binding}" />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type pages:UserRegisterViewModel}">
+        <pages1:UserRegisterPage DataContext="{Binding}" />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type pages:SelectedTicketPageViewModel}">
+        <pages1:SelectedTicketPage DataContext="{Binding}" />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type pages:PaidTicketViewModel}">
+        <pages1:PaidTicketsPage DataContext="{Binding}" />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type pages:PaymentSuccessfulPageViewModel}">
+        <pages1:PaymentSuccessfulPage DataContext="{Binding}" />
+    </DataTemplate>
+</ResourceDictionary>

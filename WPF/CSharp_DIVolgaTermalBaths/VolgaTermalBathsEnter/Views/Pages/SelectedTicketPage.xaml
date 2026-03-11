@@ -1,0 +1,350 @@
+﻿<UserControl x:Class="VolgaTermalBathsEnter.Views.Pages.SelectedTicketPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:pages="clr-namespace:VolgaTermalBathsEnter.ViewModels.Pages"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:controls="clr-namespace:VolgaTermalBathsEnter.Views.Controls"
+             mc:Ignorable="d"
+             Style="{StaticResource TicketPageBackgroundStyle}"
+             d:DesignHeight="1920" d:DesignWidth="1080"
+             d:DataContext="{d:DesignInstance pages:SelectedTicketPageViewModel}">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction
+                Command="{Binding LoadedCommand}"
+                CommandParameter="{Binding ElementName=CalendarControl}"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+    <Grid>
+        <StackPanel>
+            <ContentPresenter
+                ContentTemplate="{StaticResource ThermalLogo}"
+                Width="292"
+                Height="176"
+                HorizontalAlignment="Left"
+                Margin="360 150 0 48" />
+            <TextBlock
+                Style="{StaticResource TitleTextBlockStyle}"
+                Foreground="{StaticResource DarkGrayBrush}"
+                Text="Выберите билет"
+                Margin="0 0 0 48" />
+            <Border CornerRadius="30"
+                    Width="1022"
+                    Height="1285"
+                    Background="White">
+                <StackPanel>
+                    <TextBlock
+                        Style="{StaticResource TextBlockFontWeightNormal}"
+                        Width="926"
+                        Foreground="{StaticResource LightGrayColorBrush}"
+                        Margin="0  48 0 0">
+                        <Run FontWeight="Medium"
+                             Text="Выберите интервал времени, в который вам необходимо подойти на рецепцию термального центра и получить браслет" />
+                        <LineBreak />
+                        <Run Foreground="{StaticResource MainColorBrush}"
+                             FontWeight="Bold"
+                             Text="30 минут ВКЛЮЧЕНЫ в билет на вход, выход и переодевание" />
+                    </TextBlock>
+                    <Grid Margin="48 48 0 0">
+                        <fa:ImageAwesome Icon="Spinner" Spin="True" SpinDuration="4" Width="100"
+                                         Foreground="{StaticResource MainColorBrush}">
+                            <fa:ImageAwesome.Style>
+                                <Style TargetType="fa:ImageAwesome">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <Setter Property="Opacity" Value="1" />
+                                    <Style.Triggers>
+                                        <Trigger
+                                            Property="Opacity"
+                                            Value="0">
+                                            <Setter Property="Visibility" Value="Hidden" />
+                                        </Trigger>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard TargetProperty="Opacity">
+                                                    <DoubleAnimation To="0"
+                                                                     Duration="0:0:1.0"
+                                                                     BeginTime="0:0:1.0" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </fa:ImageAwesome.Style>
+                        </fa:ImageAwesome>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <Setter Property="Opacity" Value="0" />
+                                    <Style.Triggers>
+                                        <Trigger
+                                            Property="Opacity"
+                                            Value="0">
+                                            <Setter Property="Visibility" Value="Hidden" />
+                                        </Trigger>
+
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard TargetProperty="Opacity">
+                                                    <DoubleAnimation To="1"
+                                                                     Duration="0:0:1.5"
+                                                                     BeginTime="0:0:1.5" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+                            <controls:CalendarControlers x:Name="CalendarControl"
+                                SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                                SelectedParameterModel="{Binding SelectedParameters, Mode=TwoWay}" />
+                            <StackPanel Name="Tickets"
+                                        Margin="32 0 0 0">
+                                <ItemsControl Name="TicketTimePeriodSelector"
+                                              ItemsSource="{Binding GroupedTicketList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <!--<StackPanel Orientation="Horizontal" />-->
+                                            <WrapPanel MaxWidth="470"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <RadioButton
+                                                Template="{StaticResource ButtonTimeTemplate}"
+                                                GroupName="1"
+                                                Command="{Binding DataContext.SwitchTimesDataCommand,RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                CommandParameter="{Binding Key}"
+                                                Content="{Binding Key}">
+                                                <RadioButton.Style>
+                                                    <Style TargetType="RadioButton">
+                                                        <Setter Property="Background"
+                                                                Value="{StaticResource White}" />
+                                                        <Setter Property="BorderBrush"
+                                                                Value="{StaticResource LightGrayColorBrush}" />
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter Property="BorderBrush"
+                                                                        Value="{StaticResource OrangeBorderBrush}" />
+                                                                <Setter Property="Foreground"
+                                                                        Value="{StaticResource White}" />
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </RadioButton.Style>
+                                            </RadioButton>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <ItemsControl Name="TimeSlotGridSelector"
+                                    Margin="0 16 0 0"
+                                    ItemsSource="{Binding AvailableTimes.TimesData.Time, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Width="447" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <RadioButton
+                                                BorderThickness="0"
+                                                GroupName="2"
+                                                Command="{Binding DataContext.SelectTimeCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                CommandParameter="{Binding Name}"
+                                                IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                                                IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                                Width="143">
+                                                <RadioButton.Style>
+                                                    <Style TargetType="RadioButton">
+                                                        <Setter Property="Background"
+                                                                Value="{StaticResource MainColorBrush}" />
+                                                        <Setter Property="Template"
+                                                                Value="{StaticResource RadioButtonSelectedTime}" />
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter Property="BorderBrush"
+                                                                        Value="{StaticResource MainColorBrush}" />
+                                                                <Setter Property="Background"
+                                                                        Value="{StaticResource OrangeBorderBrush}" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsEnabled" Value="False">
+                                                                <Setter Property="Background"
+                                                                        Value="{StaticResource LightGrayColorBrush}" />
+                                                                <Setter Property="Foreground"
+                                                                        Value="{StaticResource White}" />
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </RadioButton.Style>
+                                            </RadioButton>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto"
+                                              MaxHeight="250"
+                                              Margin="0 32 0 0"
+                                              Visibility="{Binding IsTimeSelected, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <ItemsControl ItemsSource="{Binding AvailableTickets}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel
+                                                    Orientation="Vertical" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" Margin="0 0 0 9">
+                                                    <Border Style="{StaticResource BorderSelectedTicketStyle}"
+                                                            Width="255"
+                                                            Height="48"
+                                                            Margin="0 0 16 0">
+                                                        <TextBlock
+                                                            VerticalAlignment="Center"
+                                                            Style="{StaticResource TextBlockFontWeightNormal}"
+                                                            Foreground="{StaticResource LightGrayColorBrush}"
+                                                            FontSize="16">
+                                                            <Run
+                                                                Text="{Binding Title, Converter={StaticResource TextSplitChangeConverter}}" />
+                                                            <Run Text="," />
+                                                            <Run
+                                                                Text="{Binding Price, StringFormat=C, ConverterCulture=BE-ru}" />
+                                                        </TextBlock>
+                                                    </Border>
+                                                    <Button Template="{StaticResource ButtonCountTemplate}"
+                                                            Command="{Binding DataContext.DecrementCountCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                            CommandParameter="{Binding}"
+                                                            Content="-"
+                                                            FontSize="18" />
+                                                    <TextBlock
+                                                        Text="{Binding Count, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        VerticalAlignment="Center"
+                                                        Style="{StaticResource TextBlockFontWeightNormal}"
+                                                        FontSize="18"
+                                                        Width="57.33"
+                                                        Margin="2 0" />
+                                                    <Button Template="{StaticResource ButtonCountTemplate}"
+                                                            Command="{Binding DataContext.IncrementCountCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                            CommandParameter="{Binding}"
+                                                            Content="+"
+                                                            FontSize="18" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                    <Separator
+                        Width="926"
+                        BorderThickness="5"
+                        BorderBrush="#E6FAF8"
+                        Margin="0 35 0 20" />
+                    <ScrollViewer Name="TicketList"
+                                  VerticalScrollBarVisibility="Auto"
+                                  PanningMode="Both"
+                                  Width="976" Height="200">
+                        <ScrollViewer.Resources>
+                            <Style TargetType="ScrollBar" BasedOn="{StaticResource CitiesScrollBarStyle}"/>
+                        </ScrollViewer.Resources>
+                        <ItemsControl
+                            ItemsSource="{Binding TicketList}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center"
+                                                Margin="0 8">
+                                        <Grid Width="926">
+                                            <TextBlock Name="TicketInfo"
+                                                       Style="{StaticResource TextBlockFontWeightNormal}"
+                                                       VerticalAlignment="Center"
+                                                       TextWrapping="NoWrap"
+                                                       FontSize="20"
+                                                       Width="630"
+                                                       TextAlignment="Left"
+                                                       TextTrimming="WordEllipsis"
+                                                       HorizontalAlignment="Left"
+                                                       Text="{Binding AllText}"
+                                                       Foreground="{StaticResource MainColorBrush}" />
+                                            <Button Name="ButtonEnterFio"
+                                                    HorizontalAlignment="Center"
+                                                    Margin=" 504 0 0 0"
+                                                    Style="{StaticResource ButtonAddDataStyle}"
+                                                    Command="{Binding DataContext.AddDataNavigationCommand,RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                    CommandParameter="{Binding }" />
+                                            <Button Name="ButtonRemoveTicket"
+                                                    Template="{StaticResource ButtonDeleteTemplate}"
+                                                    Content="Удалить"
+                                                    Width="110"
+                                                    Height="50"
+                                                    HorizontalAlignment="Right"
+                                                    Command="{Binding DataContext.RemoveTicketCommand,RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                    CommandParameter="{Binding}" />
+                                        </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                    <Separator
+                        Width="926"
+                        BorderThickness="5"
+                        BorderBrush="#E6FAF8"
+                        Margin="0 10" />
+                    <TextBlock
+                        Style="{StaticResource TitleTextBlockStyle}"
+                        FontSize="32">
+                        <Run Text="ИТОГО" Foreground="#484848" />
+                        <Run Foreground="{StaticResource MainColorBrush}" Text="{Binding TotalPriceModel.TotalPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=C, ConverterCulture=BE-ru}" />
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal"
+                                Margin=" 0 20 0 0">
+                        <Button Name="ButtonBack"
+                                Template="{StaticResource ThermalRegisterButton}"
+                                Style="{StaticResource ButtonPopupStyle}"
+                                Command="{Binding GoBackCommand}"
+                                Width="447"
+                                Height="80"
+                                Margin="48 0 0 0"
+                                Content="Назад">
+                        </Button>
+                        <Button Name="ButtonPayment"
+                                Template="{StaticResource ThermalRegisterButton}"
+                                Width="447"
+                                Height="80"
+                                Content="Оплатить"
+                                Margin="32 0 0 0"
+                                Command="{Binding PaymentCommand}">
+                            <Button.Style>
+                                <Style BasedOn="{StaticResource ButtonPopupStyle}" TargetType="Button">
+                                    <Setter Property="Background" Value="{StaticResource LightGrayColorBrush}" />
+                                    <Setter Property="Foreground" Value="{StaticResource White}" />
+                                    <Setter Property="BorderBrush" Value="{StaticResource LightGrayColorBrush}" />
+                                    <Setter Property="IsEnabled" Value="False" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsEnabledNextPageButton}" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource MainColorBrush}" />
+                                            <Setter Property="Foreground" Value="{StaticResource White}" />
+                                            <Setter Property="BorderBrush" Value="{StaticResource MainColorBrush}" />
+                                            <Setter Property="IsEnabled" Value="True" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

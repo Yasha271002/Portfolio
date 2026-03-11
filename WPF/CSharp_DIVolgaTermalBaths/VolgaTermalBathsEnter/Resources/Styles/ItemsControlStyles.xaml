@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="AnimatedItemsControlStyle" TargetType="ItemsControl">
+        <Setter Property="Visibility" Value="Visible" />
+        <Setter Property="Opacity" Value="0" />
+        <Style.Triggers>
+            <Trigger Property="Opacity" Value="0">
+                <Setter Property="Visibility" Value="Hidden" />
+            </Trigger>
+            <DataTrigger Binding="{Binding IsAllTicketApproved}" Value="false">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard TargetProperty="Opacity">
+                            <DoubleAnimation To="0" Duration="0:0:1.0" BeginTime="0:0:1.0" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard TargetProperty="Opacity">
+                            <DoubleAnimation To="1" Duration="0:0:1.0" BeginTime="0:0:1.0" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

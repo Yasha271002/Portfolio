@@ -1,0 +1,25 @@
+{
+  "KKT": {
+    "IsTcpConnect": false,
+    "SerialPort": ,
+    "BaundRate": ,
+    "TcpAddress": "",
+    "TcpPort": ,
+    "OperatorName": "",
+    "Password": ,
+    "Timeout": ,
+    "DefaultTax1Value": 0,
+    "Shift": {
+      "IsManual": true,
+      "OpeningTime": "2025-01-24T08:00:00",
+      "CloseTime": "2025-01-24T23:55:00"
+    }
+  },
+  "Sberbank": { "Directory": "" },
+  "CashValidator": {
+    "ComPort": null,
+    "BaudRate": 0,
+    "CanGetMore": false,
+    "IsEnable": false
+  }
+}
